@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxPaginationModule } from 'ngx-pagination';
 import {
   NgxUiLoaderModule,
   NgxUiLoaderConfig,
@@ -38,7 +39,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
       preventDuplicates: true,
       closeButton: true
     }),
-    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

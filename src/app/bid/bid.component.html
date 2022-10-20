@@ -102,7 +102,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let val of bids">
+            <tr *ngFor="let val of bids|paginate: { itemsPerPage: 10, currentPage: pageNumber, totalItems: total }">
                 <td>{{val.bidAmount}}</td>
                 <td>{{val.name}}</td>
                 <td>{{val.email}}</td>
@@ -110,4 +110,5 @@
             </tr>
         </tbody>
     </table>
+    <pagination-controls *ngIf="bids!=null&&bids.length>0" (pageChange)="pageChangeEvent($event)"></pagination-controls>
 </div>

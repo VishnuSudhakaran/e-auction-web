@@ -5,6 +5,7 @@ export interface IProduct{
     startingPrice:number,
     bidEndDate:string;
     categoryId:number;
+    bidsCount:number;
 }
 
 export interface IBid{

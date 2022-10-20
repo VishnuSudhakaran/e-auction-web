@@ -21,6 +21,8 @@ export class BidComponent implements OnInit {
 
   pageNumber: number = 0;
 
+  total: number = 0;
+
   constructor(private bidservice: BidService, private ngxLoader: NgxUiLoaderService) {
     this.productDetails = {
       productName: "",
@@ -28,7 +30,8 @@ export class BidComponent implements OnInit {
       detailedDescription: "",
       startingPrice: 0,
       bidEndDate: "",
-      categoryId: 0
+      categoryId: 0,
+      bidsCount:0
     }
 
     this.pageNumber = 0;
@@ -44,19 +47,22 @@ export class BidComponent implements OnInit {
   }
 
   getProductInfo() {
+    this.ngxLoader.start();
     this.bidservice.getProductDetails(this.selectedProduct)
       .subscribe(
         res => {
           this.productDetails = res;
+          this.total=this.productDetails.bidsCount;
           this.getBidDetails();
         }, err => {
+          this.ngxLoader.stop();
           console.log('Error while getting product data.');
         }
       );
   }
 
   getBidDetails() {
-    this.ngxLoader.start();
+
     this.bidservice.getbidDetails(this.selectedProduct, this.pageNumber)
       .subscribe(
         res => {
@@ -67,5 +73,10 @@ export class BidComponent implements OnInit {
           this.ngxLoader.stop();
         }
       );
+  }
+
+  pageChangeEvent(event: number) {
+    this.pageNumber = event;
+    this.getBidDetails();
   }
 }
