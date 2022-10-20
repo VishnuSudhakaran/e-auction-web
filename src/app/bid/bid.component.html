@@ -1,0 +1,112 @@
+<div class="row product-select">
+    <div class="col-sm">
+        <span style="padding-top: 8px;float: right;">Product:</span>
+    </div>
+    <div class="col-sm">
+        <select [(ngModel)]="selectedProduct" class="form-select form-select-md">
+            <option [ngValue]="undefined" disabled>Select Product</option>
+            <option *ngFor="let prod of products" [value]="prod.productId">{{prod.productName}}</option>
+        </select>
+    </div>
+    <div class="col-sm">
+        <button type="button" class="btn btn-primary btn-sm" (click)="getProductInfo()">GET</button>
+    </div>
+</div>
+<table class="table bg-light product-detail" *ngIf="productDetails!=null&& productDetails.productName!=''">
+    <tbody>
+        <tr>
+            <td class="pd-qst">Product Name : </td>
+        </tr>
+        <tr>
+            <td class="pd-ans">{{productDetails.productName}}</td>
+        </tr>
+        <hr>
+        <tr>
+            <td class="pd-qst">Short Description : </td>
+        </tr>
+        <tr>
+            <td class="pd-ans">{{productDetails.shortDescription}}</td>
+        </tr>
+        <hr>
+        <tr>
+            <td class="pd-qst">Detailed Description : </td>
+        </tr>
+        <tr>
+            <td class="pd-ans">{{productDetails.detailedDescription}}</td>
+        </tr>
+        <hr>
+        <tr>
+            <td class="pd-qst">Category : </td>
+        </tr>
+        <tr>
+            <td class="pd-ans">{{productDetails.categoryId}}</td>
+        </tr>
+        <hr>
+        <tr>
+            <td class="pd-qst">Starting Price : </td>
+        </tr>
+        <tr>
+            <td class="pd-ans">{{productDetails.startingPrice}}</td>
+        </tr>
+        <hr>
+        <tr>
+            <td class="pd-qst">Bid End Date : </td>
+        </tr>
+        <tr>
+            <td class="pd-ans">{{productDetails.bidEndDate}}</td>
+        </tr>
+        <hr>
+    </tbody>
+</table>
+
+<!-- <table class="table table-striped" *ngIf="productDetails.product!=null&& productDetails.product.productName!=''">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Short Description</th>
+            <th>Detailed Description</th>
+            <th>Category</th>
+            <th>Starting Price</th>
+            <th>Bid End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{productDetails.product.productName}}</td>
+            <td>{{productDetails.product.shortDescription}}</td>
+            <td>{{productDetails.product.detailedDescription}}</td>
+            <td>{{productDetails.product.categoryId}}</td>
+            <td>{{productDetails.product.startingPrice}}</td>
+            <td>{{productDetails.product.bidEndDate}}</td>
+        </tr>
+    </tbody>
+</table> -->
+
+<div class="bid-detail">
+    <div class="container bid-label bg-light" *ngIf="productDetails!=null&& productDetails.productName!=''">
+        <div class="row">
+            <div class="col-sm">
+                <span>Bids</span>
+            </div>
+        </div>
+    </div>
+    <div class="container bid-label" *ngIf="(productDetails!=null&& productDetails.productName!='')&&(bids==null||bids.length<=0)">No bids placed for the product</div>
+    <table class="table table-striped" style="color: #555;" *ngIf="bids!=null&&bids.length>0">
+        <thead class="bg-light">
+            <tr>
+                <th>Bid Amount</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let val of bids">
+                <td>{{val.bidAmount}}</td>
+                <td>{{val.name}}</td>
+                <td>{{val.email}}</td>
+                <td>{{val.mobile}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
